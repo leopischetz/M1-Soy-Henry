@@ -91,10 +91,11 @@ BinarySearchTree.prototype.breadthFirstForEach= function(cb, cola = []) {
   
 
 BinarySearchTree.prototype.size= function() {
-   let cantidad = 1;
+   return 1 + this.right.size() + this.left.size();
+   /*let cantidad = 1;
    if(this.left) cantidad += this.left.size();
    if(this.right) cantidad += this.right.size();
-   return cantidad;
+   return cantidad;*/
 };
 
 
