@@ -44,9 +44,17 @@ var countArray = function(array) {
 
 var countProps = function(obj) {
     // Tu código aca:
-
-}
-
+    let count = 0;
+    for (let key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        count++;
+        if (typeof obj[key] === 'object' && !Array.isArray(obj[key])) {
+            count += countProps(obj[key]);
+            } 
+          }
+        }        
+     return count;
+  }
 
 // Implementar el método changeNotNumbers dentro del prototype de LinkedList que deberá cambiar
 // aquellos valores que no puedan castearse a numeros por 'Kiricocho' y devolver la cantidad de cambios que hizo
@@ -58,7 +66,21 @@ var countProps = function(obj) {
 
 LinkedList.prototype.changeNotNumbers = function(){
     // Tu código aca:
-
+    var comparacion = this.head;
+    let contador = 0;
+    if(!this.head) return contador;
+    if(isNaN(comparacion.value)){
+        this.head.value = "Kiricocho";
+        contador++;
+    }
+    while(comparacion.next){
+        comparacion = comparacion.next;
+        if(isNaN(comparacion.value)){
+            comparacion.value = "Kiricocho";
+            contador++;
+        }
+    }
+    return contador;
 }
 
 
@@ -72,7 +94,25 @@ LinkedList.prototype.changeNotNumbers = function(){
 
 var mergeQueues = function(queueOne, queueTwo) {
     // Tu código aca:
+    var colaUno = queueOne.array;
+    var colaDos = queueTwo.array;
+    var nueva = new Queue();
+    var j = 0;
+    if(colaUno.length >= colaDos.length){
+        j = colaUno.length;
+    } else{
+        j=colaDos.length;
+    }
 
+    for(var i=0; i<j; i++){
+        if(colaUno[i]){
+            nueva.enqueue(colaUno[i]);
+        }
+        if(colaDos[i]){
+            nueva.enqueue(colaDos[i]);
+        }
+    }
+    return nueva;
 }
 
 
@@ -87,14 +127,22 @@ var mergeQueues = function(queueOne, queueTwo) {
 
 var closureMult = function(multiplier) {
     // Tu código aca:
-
+    return function(a){
+        return multiplier * a;
+    } 
 }
 
 // Implementar el método sum dentro del prototype de BinarySearchTree
 // que debe retornar la suma total de los valores dentro de cada nodo del arbol
-BinarySearchTree.prototype.sum = function() {
+BinarySearchTree.prototype.sum = function(suma =0, cola=[]) {
     // Tu código aca:
-
+    suma+=this.value;
+   if(this.left) cola.push(this.left);
+   if(this.right) cola.push(this.right);
+   if(cola.length >= 1) {
+    return cola.shift().sum(suma, cola);
+   };
+   return suma;
 }
 
 module.exports = {

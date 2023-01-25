@@ -47,7 +47,6 @@ function insertionSort(array) {
   // Devolver el array ordenado resultante
   // Tu código:
   let j, temporal;
-
   for(let i=1; i<array.length; i++){
     j=i;
     temporal=array[i];
@@ -57,9 +56,7 @@ function insertionSort(array) {
     }
     array[j] = temporal;
   }
-
   return array;
-
 }
 
 
